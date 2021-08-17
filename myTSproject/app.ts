@@ -1,4 +1,4 @@
-function combine(a: number | string, b: number | string, resultType: 'n' | 's') {
+function combineInputs(a: number | string, b: number | string, resultType: 'n' | 's') {
         let result: number | string;
 
         if (typeof a === 'number' && typeof b === 'number')
@@ -12,6 +12,6 @@ function combine(a: number | string, b: number | string, resultType: 'n' | 's') 
                 return result.toString();
 }
 
-const result = combine('hello', 'world', 's');
+const result = combineInputs('hello', 'world', 's');
 console.log(result);
 
