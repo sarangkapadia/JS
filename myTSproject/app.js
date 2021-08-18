@@ -1,4 +1,4 @@
-function combine(a, b, resultType) {
+function combineInputs(a, b, resultType) {
     var result;
     if (typeof a === 'number' && typeof b === 'number')
         result = a + b;
@@ -9,5 +9,16 @@ function combine(a, b, resultType) {
     else
         return result.toString();
 }
-var result = combine('hello', 'world', 's');
-console.log(result);
+// const result = combineInputs('hello', 'earth', 's');
+var func;
+func = combineInputs;
+console.log(func('hello', 'moon', 's'));
+function addAndHandle(a, b, callback) {
+    console.log('addAndHandle called');
+    var result = a + b;
+    callback(result);
+}
+var callback = function (result) {
+    console.log("yo The result is " + result);
+};
+addAndHandle(19, 21, callback);
