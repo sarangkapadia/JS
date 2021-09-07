@@ -52,8 +52,36 @@ class Board extends React.Component {
         );
     }
 
+    calculateWinner() {
+        const lines = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        for (const line of lines) {
+            let [x, y, z] = line;
+            if (this.state.squares[x] === this.state.squares[y] &&
+                this.state.squares[y] === this.state.squares[z]) {
+                return this.state.squares[x];
+            }
+        }
+
+        return null;
+    }
+
     render() {
-        const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        let result = this.calculateWinner();
+
+        const status = (result !== null) ? 'Winner: ' + result : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+
+        if (result !== null)
+            this.state.squares.fill(null);
 
         return (
             <div>
@@ -73,7 +101,7 @@ class Board extends React.Component {
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
                 </div>
-            </div>
+            </div >
         );
     }
 }
@@ -85,6 +113,7 @@ class Game extends React.Component {
                 <div className="game-board">
                     <Board />
                 </div>
+
                 <div className="game-info">
                     <div>{/* status */}</div>
                     <ol>{/* TODO */}</ol>
