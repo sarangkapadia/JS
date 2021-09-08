@@ -43,7 +43,7 @@ class Board extends React.Component {
         );
     }
 }
-
+/*
 class TimeCapsule extends React.Component {
     render() {
         let elements = [];
@@ -65,6 +65,7 @@ class TimeCapsule extends React.Component {
         )
     }
 }
+*/
 
 class Game extends React.Component {
     constructor(props) {
@@ -114,6 +115,16 @@ class Game extends React.Component {
             status = 'Game draw'
         }
 
+        const moves = history.map((element, count) => {
+            return (
+                <li key={count}>
+                    <button className="moveButton" onClick={() => this.handleGotoMove(count)}>
+                        {"Goto " + (count ? count : "start")}
+                    </button>
+                </li>
+            )
+        })
+
         return (
             <div className="game">
                 <div className="game-board">
@@ -124,11 +135,12 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{
+                    <ol>
+                        {moves/* {
                         <TimeCapsule
                             onClick={(moveCount) => this.handleGotoMove(moveCount)}
                             numberOfMoves={this.state.history.length}
-                        />}
+                        />} */}
                     </ol>
                 </div>
                 <div className="time">
