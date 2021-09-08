@@ -108,8 +108,10 @@ class Game extends React.Component {
         let status;
         if (winner) {
             status = 'Winner: ' + winner;
-        } else {
+        } else if (this.state.moveCount < 9) {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        } else {
+            status = 'Game draw'
         }
 
         return (
