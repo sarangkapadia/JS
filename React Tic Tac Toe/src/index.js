@@ -2,23 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import './index.css';
 
-
-// class Square extends React.Component {
-//     render() {
-//         return (
-//             <button
-//                 className="square"
-//                 onClick={() => {
-//                     this.props.onClick();
-//                 }}>
-//                 {this.props.value}
-//             </button>
-//         );
-//     }
-// }
-
 // function component
-
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -29,15 +13,17 @@ function Square(props) {
 
 class Board extends React.Component {
     renderSquare(i) {
-        return (<Square value={this.props.squares[i]}
-            onClick={() => this.props.onClick(i)}
-        />
+        return (
+            <Square
+                onClick={() => this.props.onClick(i)}
+                value={this.props.squares[i]}
+            />
         );
     }
 
     render() {
         return (
-            <div>
+            <div> {/* wrap 3 into 1 element */}
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -58,17 +44,40 @@ class Board extends React.Component {
     }
 }
 
+class TimeCapsule extends React.Component {
+    render() {
+        let elements = [];
+
+        for (let index = 0; index < this.props.numberOfMoves; index++) {
+            elements.push(
+                <li key={index}>
+                    <button className="moveButton" onClick={() => this.props.onClick(index)} >
+                        {"Go to " + (index === 0 ? "start" : index)}
+                    </button>
+                </li>
+            );
+        }
+
+        return (
+            <div>
+                {elements}
+            </div>
+        )
+    }
+}
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             history: [{ squares: Array(9).fill(null) }],
             xIsNext: true,
+            moveCount: 0,
         };
     }
 
     handleClick(i) {
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.moveCount + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
@@ -80,12 +89,21 @@ class Game extends React.Component {
                 squares: squares,
             }]),
             xIsNext: !this.state.xIsNext,
+            moveCount: this.state.moveCount + 1,
+        });
+    }
+
+    handleGotoMove(moveCount) {
+        const xIsNext = moveCount % 2 ? false : true;
+        this.setState({
+            moveCount: moveCount,
+            xIsNext: xIsNext,
         });
     }
 
     render() {
         const history = this.state.history;
-        const current = history[history.length - 1];
+        const current = history[this.state.moveCount];
         const winner = calculateWinner(current.squares);
         let status;
         if (winner) {
@@ -104,7 +122,15 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{/* TODO */}</ol>
+                    <ol>{
+                        <TimeCapsule
+                            onClick={(moveCount) => this.handleGotoMove(moveCount)}
+                            numberOfMoves={this.state.history.length}
+                        />}
+                    </ol>
+                </div>
+                <div className="time">
+
                 </div>
             </div>
         );
