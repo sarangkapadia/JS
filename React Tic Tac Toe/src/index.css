@@ -18,8 +18,8 @@ body {
   }
   
    .square {
-    background: seagreen;
-    border: 1px solid #999;
+    background: lightskyblue;
+    border: 1px solid rgb(0, 0, 0);
     float: left;
     font-size: 24px;
     font-weight: bold;
@@ -51,8 +51,9 @@ body {
   }
 
   .moveButton {
-    background: skyblue;
+    background: lightskyblue;
     text-align: center;
     width: 100px;
+    border: 1px solid rgb(0, 0, 0);
   }
   

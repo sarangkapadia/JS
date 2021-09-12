@@ -5,7 +5,7 @@ import './index.css';
 // function component
 function Square(props) {
     return (
-        <button className="square" onClick={props.onClick}>
+        <button className="square" onClick={props.onClick} style={props.backgroundColor}>
             {props.value}
         </button >
     );
@@ -13,10 +13,18 @@ function Square(props) {
 
 class Board extends React.Component {
     renderSquare(i) {
+        let bkColor;
+
+        if (this.props.winners.includes(i)) {
+            bkColor = { backgroundColor: 'lightgreen' };
+        } else {
+            bkColor = { backgroundColor: 'lightskyblue' };
+        }
         return (
             <Square
                 onClick={() => this.props.onClick(i)}
                 value={this.props.squares[i]}
+                backgroundColor={bkColor}
             />
         );
     }
@@ -43,7 +51,7 @@ class Board extends React.Component {
         );
     }
 }
-
+/*
 class TimeCapsule extends React.Component {
     render() {
         let elements = [];
@@ -65,6 +73,7 @@ class TimeCapsule extends React.Component {
         )
     }
 }
+*/
 
 class Game extends React.Component {
     constructor(props) {
@@ -80,7 +89,8 @@ class Game extends React.Component {
         const history = this.state.history.slice(0, this.state.moveCount + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
-        if (calculateWinner(squares) || squares[i]) {
+        let winners = { cells: [null, null, null] };
+        if (squares[i] || calculateWinner(squares, winners)) {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -89,7 +99,7 @@ class Game extends React.Component {
                 squares: squares,
             }]),
             xIsNext: !this.state.xIsNext,
-            moveCount: this.state.moveCount + 1,
+            moveCount: history.length,
         });
     }
 
@@ -103,16 +113,35 @@ class Game extends React.Component {
 
     render() {
         const history = this.state.history;
+        let winners = { cells: [null, null, null] };
         const current = history[this.state.moveCount];
-        const winner = calculateWinner(current.squares);
+        const winner = calculateWinner(current.squares, winners);
         let status;
+        let winningMoveCount = -1;
+
         if (winner) {
             status = 'Winner: ' + winner;
+            winningMoveCount = this.state.moveCount;
         } else if (this.state.moveCount < 9) {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         } else {
             status = 'Game draw'
         }
+
+        const moves = history.map((element, count) => {
+            let backgroundColor;
+            if (count === winningMoveCount) {
+                backgroundColor = { backgroundColor: 'lightgreen' };
+            }
+
+            return (
+                <li key={count}>
+                    <button className="moveButton" onClick={() => this.handleGotoMove(count)} style={backgroundColor}>
+                        {"Goto " + (count ? count : "start")}
+                    </button>
+                </li>
+            )
+        })
 
         return (
             <div className="game">
@@ -120,15 +149,17 @@ class Game extends React.Component {
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
+                        winners={winners.cells}
                     />
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{
+                    <ol>
+                        {moves/* {
                         <TimeCapsule
                             onClick={(moveCount) => this.handleGotoMove(moveCount)}
                             numberOfMoves={this.state.history.length}
-                        />}
+                        />} */}
                     </ol>
                 </div>
                 <div className="time">
@@ -146,7 +177,7 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-function calculateWinner(squares) {
+function calculateWinner(squares, _winning) {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -157,11 +188,14 @@ function calculateWinner(squares) {
         [0, 4, 8],
         [2, 4, 6]
     ];
+
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            _winning.cells = [a, b, c];
             return squares[a];
         }
     }
+
     return null;
 }
