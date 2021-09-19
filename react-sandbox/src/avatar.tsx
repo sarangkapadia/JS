@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DefaultButton } from '@fluentui/react';
 
 interface IImageProps {
     src: string;
@@ -6,7 +7,16 @@ interface IImageProps {
 }
 
 export class Avatar extends React.Component<IImageProps> {
+    handleOnClick() {
+        alert("I'm in avatar");
+    }
+
     render() {
-        return <img className="Avatar" src={this.props.src} alt={this.props.alt} />
+        return (
+            <>
+                <DefaultButton text="Avatar's fluent button" onClick={this.handleOnClick} />
+                <img className="Avatar" src={this.props.src} alt={this.props.alt} />
+            </>
+        );
     }
 }
