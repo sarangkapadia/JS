@@ -1,10 +1,11 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Welcome } from './welcome';
+//import { Welcome } from './welcome';
 import { Comment } from './comment';
 import { Clock } from "./clock";
 import { DefaultButton } from '@fluentui/react';
+import { ToggleButton } from './toggleButton';
 
 const name = "React!";
 const reactLink = "https://reactjs.org/docs/introducing-jsx.html";
@@ -64,6 +65,8 @@ function renderMe() {
       </div>
 
       <DefaultButton style={{ color: 'yellow', backgroundColor: 'green' }} text="Fluent Button" onClick={() => { alert("button on click"); }} />
+
+      <ToggleButton color="blue" />
 
     </div >),
     document.getElementById("root")
