@@ -40,6 +40,12 @@ function renderMe() {
     height: dim,
   }
 
+  const list = ["It's easy to use", <> Great documentation at <a href={reactLink}> {reactFriendly}</a > </>];
+  // const listToRender = list.map((item, index) =>
+  //   <li key={index}>
+  //     {item}
+  //   </li>);
+
   ReactDOM.render(
     (<div>
       <div>
@@ -50,8 +56,10 @@ function renderMe() {
 
       <div>
         <ul>
-          <li>It's easy to use</li>
-          <li>Great documentation at <a href={reactLink}>{reactFriendly}</a></li>
+          {list.map((item, index) =>
+            <li key={index}>
+              {item}
+            </li>)}
         </ul>
       </div>
 
