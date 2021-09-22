@@ -6,6 +6,7 @@ import { Comment } from './comment';
 import { Clock } from "./clock";
 import { DefaultButton } from '@fluentui/react';
 import { ToggleButton } from './toggleButton';
+import { LoginControl } from './logincontrol';
 
 const name = "React!";
 const reactLink = "https://reactjs.org/docs/introducing-jsx.html";
@@ -47,12 +48,12 @@ function renderMe() {
 
       <h2>I love {name}</h2>
 
-      <p>
+      <div>
         <ul>
           <li>It's easy to use</li>
           <li>Great documentation at <a href={reactLink}>{reactFriendly}</a></li>
         </ul>
-      </p>
+      </div>
 
       <div>
         <Clock />
@@ -61,7 +62,6 @@ function renderMe() {
       <div>
         <canvas style={rectStyle} />
       </div>
-
 
       <div>
         <Comment
@@ -73,8 +73,13 @@ function renderMe() {
       <div>
         <DefaultButton style={{ color: 'yellow', backgroundColor: 'green' }} text="Fluent Button" onClick={() => { alert("button on click"); }} />
       </div>
+
       <div>
         <ToggleButton color="blue" />
+      </div>
+
+      <div>
+        <LoginControl initLoginState={true} />
       </div>
 
     </div >),
