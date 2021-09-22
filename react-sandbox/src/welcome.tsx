@@ -8,7 +8,7 @@ interface IWelcomeProps {
 
 export class Welcome extends React.Component<IWelcomeProps> {
     render() {
-        return <h2 style={this.props.style}>Welcome {this.props.name}</h2>
+        return <h1 style={this.props.style}>Welcome {this.props.name}</h1>
     }
 }
 /*

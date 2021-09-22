@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//import { Welcome } from './welcome';
+import { Welcome } from './welcome';
 import { Comment } from './comment';
 import { Clock } from "./clock";
 import { DefaultButton } from '@fluentui/react';
@@ -10,7 +10,6 @@ import { ToggleButton } from './toggleButton';
 const name = "React!";
 const reactLink = "https://reactjs.org/docs/introducing-jsx.html";
 const reactFriendly = "React.js";
-
 
 function getRandomColor() {
   let letters = '0123456789ABCDEF';
@@ -23,27 +22,30 @@ function getRandomColor() {
 
 
 function getRandomNumber() {
-  let dim = Math.floor(Math.random() * 100);
+  let dim = Math.floor(Math.random() * 100) + 20;
   return dim.toString() + "px";
 }
 
 function renderMe() {
   let welcomeStyle = {
-    color: 'orange',
+    color: getRandomColor(),
   };
 
   const dim = getRandomNumber();
 
   let rectStyle = {
-    backgroundColor: 'green',//getRandomColor(),
-    width: "50px",
-    height: "50px",
+    backgroundColor: getRandomColor(),
+    width: dim,
+    height: dim,
   }
 
   ReactDOM.render(
     (<div>
+      <div>
+        <Welcome style={welcomeStyle} name={"sarang"} />
+      </div>
 
-      <h1>Hello, I love {name}</h1>
+      <h2>I love {name}</h2>
 
       <p>
         <ul>
@@ -52,10 +54,14 @@ function renderMe() {
         </ul>
       </p>
 
+      <div>
+        <Clock />
+      </div>
 
-      <Clock />
+      <div>
+        <canvas style={rectStyle} />
+      </div>
 
-      <canvas style={rectStyle} />
 
       <div>
         <Comment
@@ -64,9 +70,12 @@ function renderMe() {
         />
       </div>
 
-      <DefaultButton style={{ color: 'yellow', backgroundColor: 'green' }} text="Fluent Button" onClick={() => { alert("button on click"); }} />
-
-      <ToggleButton color="blue" />
+      <div>
+        <DefaultButton style={{ color: 'yellow', backgroundColor: 'green' }} text="Fluent Button" onClick={() => { alert("button on click"); }} />
+      </div>
+      <div>
+        <ToggleButton color="blue" />
+      </div>
 
     </div >),
     document.getElementById("root")
