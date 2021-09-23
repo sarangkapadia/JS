@@ -25,6 +25,45 @@ http.onreadystatechange = function (e: Event) {
       console.log("NO response");
 };
 
-// ==== fetch HTML request ========
-fetch(url).then(data => { return data.json() }).then(res => { console.log(res) });
+// https://jsonplaceholder.typicode.com/guide/
 
+// ==== fetch GET ========
+// fetch('https://jsonplaceholder.typicode.com/posts/1')
+//    .then(data => { return data.json() })
+//    .then(res => { console.log(res) });
+
+// --- POST
+// fetch('https://jsonplaceholder.typicode.com/posts', {
+//    method: 'POST',
+//    body: JSON.stringify({
+//       title: 'foo',
+//       body: 'bar',
+//       userId: 2,
+//    }),
+//    headers: {
+//       'Content-type': 'application/json; charset=UTF-8',
+//    },
+// })
+//    .then((response) => response.json())
+//    .then((json) => console.log(json));
+
+// --- PUT ---
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+   method: 'PUT',
+   body: JSON.stringify({
+      id: 1,
+      title: 'foo ska',
+      body: 'bar ska',
+      userId: 1,
+   }),
+   headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+   },
+})
+   .then((response) => response.json())
+   .then((json) => {
+      console.log(json);
+      fetch('https://jsonplaceholder.typicode.com/posts/1')
+         .then(data => { return data.json() })
+         .then(res => { console.log(res) });
+   });

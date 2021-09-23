@@ -1,4 +1,3 @@
-"use strict";
 function combineInputs(a, b, resultType) {
     var result;
     if (typeof a === 'number' && typeof b === 'number')

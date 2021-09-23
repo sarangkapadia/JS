@@ -1,4 +1,3 @@
-"use strict";
 var Role;
 (function (Role) {
     Role[Role["admin"] = 0] = "admin";

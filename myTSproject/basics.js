@@ -1,4 +1,3 @@
-"use strict";
 console.log("hello world!");
 function add(n1, n2, showResult, phrase) {
     if (showResult)
