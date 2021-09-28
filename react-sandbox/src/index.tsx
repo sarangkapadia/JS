@@ -7,6 +7,7 @@ import { Clock } from "./clock";
 import { DefaultButton } from '@fluentui/react';
 import { ToggleButton } from './toggleButton';
 import { LoginControl } from './logincontrol';
+import { ImagePicker } from './imagepicker';
 
 const name = "React!";
 const reactLink = "https://reactjs.org/docs/introducing-jsx.html";
@@ -90,6 +91,9 @@ function renderMe() {
         <LoginControl initLoginState={true} />
       </div>
 
+      <div>
+        <ImagePicker />
+      </div>
     </div >),
     document.getElementById("root")
   )
