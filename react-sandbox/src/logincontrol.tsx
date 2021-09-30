@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { DefaultButton } from '@fluentui/react';
 import { Greeting } from './greeting';
 
@@ -6,11 +7,11 @@ interface IButtonProps {
     onClickHandler: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function LoginButton(props: IButtonProps) {
+const LoginButton: React.FunctionComponent<IButtonProps> = (props) => {
     return <DefaultButton onClick={props.onClickHandler} text="Login" />
 }
 
-function LogoutButton(props: IButtonProps) {
+const LogoutButton: React.FunctionComponent<IButtonProps> = (props) => {
     return <DefaultButton onClick={props.onClickHandler} text="Logout" />
 }
 
@@ -18,42 +19,27 @@ interface ILoginControlProps {
     initLoginState: boolean
 }
 
-interface ILoginControlState {
-    isLoggedIn: boolean
-}
+export const LoginControl: React.FunctionComponent<ILoginControlProps> = (props) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(props.initLoginState);
 
-export class LoginControl extends React.Component<ILoginControlProps, ILoginControlState> {
-    constructor(props: ILoginControlProps) {
-        super(props);
-        this.state = { isLoggedIn: this.props.initLoginState }
-        this.handleLogin = this.handleLogin.bind(this);
-        this.handleLogout = this.handleLogout.bind(this);
-    }
-
-    handleLogin() {
+    const handleLogin = () => {
         console.log("IN handleLogin");
-        this.setState({
-            isLoggedIn: !this.state.isLoggedIn,
-        });
+        setIsLoggedIn(!isLoggedIn);
     }
 
-    handleLogout() {
+    const handleLogout = () => {
         console.log("IN handleLogout");
-        this.setState({
-            isLoggedIn: false,
-        });
+        setIsLoggedIn(!isLoggedIn);
     }
 
-    render() {
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    {this.state.isLoggedIn ? <LogoutButton onClickHandler={this.handleLogout} /> : <LoginButton onClickHandler={this.handleLogin} />}
-                </div>
-                <div>
-                    <Greeting isLoggedIn={this.state.isLoggedIn} welcomeText="Good day!" />
-                </div>
-            </div >
-        );
-    }
+                {isLoggedIn ? <LogoutButton onClickHandler={handleLogout} /> : <LoginButton onClickHandler={handleLogin} />}
+            </div>
+            <div>
+                <Greeting isLoggedIn={isLoggedIn} welcomeText="Good day!" />
+            </div>
+        </div >
+    );
 }

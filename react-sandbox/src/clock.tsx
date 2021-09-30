@@ -1,39 +1,26 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { clearInterval } from 'timers';
 
 type clockProps = any;
-type clockState = { timeStamp: string };
 
-export class Clock extends React.Component<clockProps, clockState> {
-    timerID!: NodeJS.Timeout;
+export const Clock: React.FunctionComponent<clockProps> = (props) => {
+    const [timeStamp, setTimeStamp] = useState(new Date().toLocaleTimeString());
 
-    constructor(props: clockProps) {
-        super(props);
-        const timeStamp = new Date().toLocaleTimeString();
-        this.state = {
-            timeStamp: timeStamp,
-        }
-
-    }
-
-    componentDidMount() {
-        this.timerID = setInterval(() => {
+    useEffect(() => {
+        let timerID = setInterval(() => {
             const timeStamp = new Date().toLocaleTimeString();
-            this.setState({
-                timeStamp: timeStamp,
-            })
+            setTimeStamp(timeStamp);
+            return () => {
+                clearInterval(timerID);
+            };
         }, 1000);
-    }
+    });
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
+    return (
+        <p>
+            {timeStamp}
+        </p>
+    );
 
-    render() {
-        return (
-            <p>
-                {this.state.timeStamp}
-            </p>
-        );
-    }
 }
