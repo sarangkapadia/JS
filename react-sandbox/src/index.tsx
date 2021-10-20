@@ -8,6 +8,7 @@ import { DefaultButton } from '@fluentui/react';
 import { ToggleButton } from './toggleButton';
 import { LoginControl } from './logincontrol';
 import { ImagePicker } from './imagepicker';
+import { List } from './list';
 
 const name = "React!";
 const reactLink = "https://reactjs.org/docs/introducing-jsx.html";
@@ -93,6 +94,10 @@ function renderMe() {
 
       <div>
         <ImagePicker />
+      </div>
+
+      <div>
+        <List initVal={1}/>
       </div>
     </div >),
     document.getElementById("root")
