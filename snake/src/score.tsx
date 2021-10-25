@@ -4,7 +4,6 @@ export interface IScoreProps{
     currentScore:number;
 }
 export const Score: React.FunctionComponent<IScoreProps> = (props) => {
-    return <div>
-        <h2>Score: {props.currentScore}</h2>
-    </div>
+    console.log("Score rendering");
+    return <h2>Score: {props.currentScore}</h2>
 }

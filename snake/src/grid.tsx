@@ -1,21 +1,27 @@
 import React from 'react';
-import {GridBox} from './gridBox';
+import Box from './box';
 
-export interface IGridProps{
-    size: number;    // number of row,col in the snake canvas
-};
+import './style/grid.css'
 
-export const Grid: React.FunctionComponent<IGridProps> = (props) => {
+const root = document.querySelector(':root')!;
+const rootStyle = getComputedStyle(root);
+let gridSize = parseInt(rootStyle.getPropertyValue('--gridSize'));
+gridSize *= gridSize;
+
+const defaultSnakeLength = 5;
+const defaultStartIndex = Math.floor(gridSize/2) + defaultSnakeLength;
+
+
+export const Grid: React.FunctionComponent = () => {
+
+    console.log('Grid rendering', gridSize, defaultStartIndex);
+
     return (
-    <div style={{display:'flex', width: '500px'}}>
-        <GridBox />
-        <GridBox />
-        <GridBox />
-        <GridBox />
-        <GridBox />
-        <GridBox />
-        <GridBox />
-        <GridBox />
-        
+    <div className={'gridContainer'}>
+        {[
+            ...Array(gridSize),
+            ].map((value: undefined, index: number) => (
+                                <Box id={index} key={index} className={index===defaultStartIndex?'snake':'box'}/>
+        ))}
     </div>);
 }

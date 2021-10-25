@@ -1,0 +1,11 @@
+.box {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  background-color: var(--boxBackgroundColor);
+}
+
+.snake {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  background-color: var(--snakeColor);
+}
