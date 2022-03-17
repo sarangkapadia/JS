@@ -1,3 +1,4 @@
+"use strict";
 var button = document.querySelector('button');
 function onbuttonclick() {
     console.log('clicked');

@@ -1,6 +1,4 @@
-import features from './featureGates.json';
-
-console.log(features);
+// import Axios from 'axios';
 
 class Coordinate {
    constructor(private x?: number, private y?: number) {
@@ -30,6 +28,14 @@ xhr.onreadystatechange = function () {
 };
 
 xhr.send();
+
+const simplebookapis = async () => {
+   const baseUrl = 'https://simple-books-api.glitch.me';
+   const response = await fetch(`https://simple-books-api.glitch.me/status`);
+   console.log(response);
+}
+
+simplebookapis();
 
 // https://jsonplaceholder.typicode.com/guide/
 

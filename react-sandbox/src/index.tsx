@@ -9,6 +9,7 @@ import { ToggleButton } from './toggleButton';
 import { LoginControl } from './logincontrol';
 import { ImagePicker } from './imagepicker';
 import { List } from './list';
+import Axios from 'axios';
 
 const name = "React!";
 const reactLink = "https://reactjs.org/docs/introducing-jsx.html";
@@ -29,7 +30,7 @@ function getRandomNumber() {
   return dim.toString() + "px";
 }
 
-function renderMe() {
+const renderMe = async () => {
   let welcomeStyle = {
     color: getRandomColor(),
   };
@@ -47,6 +48,10 @@ function renderMe() {
   //   <li key={index}>
   //     {item}
   //   </li>);
+
+  const response = await Axios.get('https://my-json-server.typicode.com/typicode/demo/posts');
+  console.log(response.data);
+
 
   ReactDOM.render(
     (<div>
@@ -99,6 +104,11 @@ function renderMe() {
       <div>
         <List initVal={1}/>
       </div>
+
+      <div>
+
+      </div>
+
     </div >),
     document.getElementById("root")
   )
