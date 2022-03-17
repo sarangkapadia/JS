@@ -1,0 +1,22 @@
+{
+    "features":[
+       {
+          "name":"Designer.VideoPanel",
+          "active":true
+       },
+       {
+          "name":"Designer.ImagePanel",
+          "active":true
+       },
+       {
+          "name":"Designer.TextPanel",
+          "active":true
+       },
+       {
+          "name":"Designer.ElementsPanel",
+          "active":true
+       }
+    ]
+ }
+ 
+ 

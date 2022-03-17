@@ -9,3 +9,9 @@
   height: var(--boxSize);
   background-color: var(--snakeColor);
 }
+
+.food {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  background-color: var(--foodColor);
+}

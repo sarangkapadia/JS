@@ -30,8 +30,9 @@ export const ImagePicker: React.FunctionComponent = () => {
         <div>
             <iframe
                 title={title}
-                src={url + options}
+                src={url}
                 height={'600px'}
+                width={'600px'}
             />
             {/* <iframe
                 title={title}

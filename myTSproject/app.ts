@@ -1,3 +1,7 @@
+import features from './featureGates.json';
+
+console.log(features);
+
 class Coordinate {
    constructor(private x?: number, private y?: number) {
    }
@@ -74,3 +78,4 @@ xhr.send();
 //          .then(data => { return data.json() })
 //          .then(res => { console.log(res) });
 //    });
+

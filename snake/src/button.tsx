@@ -1,7 +1,12 @@
 import React from 'react';
 import './style/button.css';
 
-export const Button:React.FunctionComponent = () => {
-    console.log("Button rendering");
-    return <button className={'newGame'}>{'New Game'}</button>;
+interface IButtonProps{
+    onClick: () => void;
+    label: string;
 }
+
+export const Button:React.FunctionComponent<IButtonProps> = React.memo((props) => {
+    console.log("Button rendering");
+    return <button className={'newGame'} onClick={props.onClick} >{props.label}</button>;
+});

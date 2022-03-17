@@ -1,3 +1,7 @@
+"use strict";
+exports.__esModule = true;
+var featureGates_json_1 = require("./featureGates.json");
+console.log(featureGates_json_1["default"]);
 var Coordinate = /** @class */ (function () {
     function Coordinate(x, y) {
         this.x = x;

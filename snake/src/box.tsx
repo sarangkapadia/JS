@@ -2,13 +2,11 @@ import React from 'react';
 import './style/box.css';
 
 interface IBoxProps{
-    id: number,
+    id?: number,
     className: string,
 }
 
-const Box:React.FunctionComponent<IBoxProps> = (props) => {
-    console.log("Box rendering");
-    return <div className={props.className} >{props.id}</div>;
-};
-
-export default React.memo(Box);
+export const Box:React.FunctionComponent<IBoxProps> = React.memo((props) => {
+    console.log("Box rendering props: ", props.className);
+    return <div className={props.className} ></div>;
+});
